@@ -1,11 +1,15 @@
 import React from 'react';
+import { Content } from './components/layout/Content';
+import { Header } from './components/layout/Header';
+import { Tasks } from './components/Tasks';
+import './App.scss';
 
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
-				<p>Hello there;</p>
-			</header>
+			<Header />
+			<Content />
+			<Tasks />
 		</div>
 	);
 }
