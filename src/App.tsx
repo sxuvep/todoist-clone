@@ -3,14 +3,20 @@ import { Content } from './components/layout/Content';
 import { Header } from './components/layout/Header';
 import { Tasks } from './components/Tasks';
 import './App.scss';
+import { ProjectsProvider } from './context/ProjectContext';
+import { SelectedProjectProvider } from './context/SelectedProjectContext';
 
 function App() {
 	return (
-		<div className="App">
-			<Header />
-			<Content />
-			<Tasks />
-		</div>
+		<ProjectsProvider>
+			<SelectedProjectProvider>
+				<div className="App">
+					<Header />
+					<Content />
+					<Tasks />
+				</div>
+			</SelectedProjectProvider>
+		</ProjectsProvider>
 	);
 }
 
