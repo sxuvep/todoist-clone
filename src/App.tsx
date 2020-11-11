@@ -5,19 +5,22 @@ import { Tasks } from './components/Tasks';
 import './App.scss';
 import { ProjectsProvider } from './context/ProjectContext';
 import { SelectedProjectProvider } from './context/SelectedProjectContext';
+import { Theme } from './context/ThemeContext';
 
 function App() {
-	return (
-		<ProjectsProvider>
-			<SelectedProjectProvider>
-				<div className="App">
-					<Header />
-					<Content />
-					<Tasks />
-				</div>
-			</SelectedProjectProvider>
-		</ProjectsProvider>
-	);
+  return (
+    <Theme>
+      <ProjectsProvider>
+        <SelectedProjectProvider>
+          <div className="App">
+            <Header />
+            <Content />
+            <Tasks />
+          </div>
+        </SelectedProjectProvider>
+      </ProjectsProvider>
+    </Theme>
+  );
 }
 
 export default App;

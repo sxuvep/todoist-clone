@@ -7,37 +7,33 @@ import { useProjectsContext } from '../context/ProjectContext';
 import { collatedTasksExist, getCollatedTitle, getTitle } from '../helpers';
 
 export const Tasks = () => {
-	const { selectedProject } = useSelectedProjectContext();
-	const { projects } = useProjectsContext();
-	const { tasks } = useTasks(selectedProject);
+  const { selectedProject } = useSelectedProjectContext();
+  const { projects } = useProjectsContext();
+  const { tasks } = useTasks(selectedProject);
+  let projectName = '';
+  if (projects && selectedProject && !collatedTasksExist(selectedProject)) {
+    projectName = getTitle(projects, selectedProject)?.name;
+  }
 
-	let projectName = '';
+  if (collatedTasksExist(selectedProject) && selectedProject) {
+    projectName = getCollatedTitle(collatedTasks, selectedProject)?.name;
+  }
 
-	if (projects && selectedProject && !collatedTasksExist(selectedProject)) {
-		projectName = getTitle(projects, selectedProject)?.name;
-	}
+  useEffect(() => {
+    document.title = `${projectName}: Todoist`;
+  });
 
-	if (collatedTasksExist(selectedProject) && selectedProject) {
-		projectName = getCollatedTitle(collatedTasks, selectedProject)?.name;
-	}
-
-	useEffect(() => {
-		document.title = `${projectName}: Todoist`;
-	});
-
-	console.log(tasks);
-
-	return (
-		<div className="tasks" data-testid="tasks">
-			<h2 data-testid="project-name">{projectName}</h2>
-			<ul className="tasks__list">
-				{tasks.map((task: any) => (
-					<li key={task.id}>
-						<Checkbox id={task.id} />
-						<span>{task.task}</span>
-					</li>
-				))}
-			</ul>
-		</div>
-	);
+  return (
+    <div className="tasks" data-testid="tasks">
+      <h2 data-testid="project-name">{projectName}</h2>
+      <ul className="tasks__list">
+        {tasks.map((task: any) => (
+          <li key={task.id}>
+            <Checkbox id={task.id} />
+            <span>{task.task}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };
